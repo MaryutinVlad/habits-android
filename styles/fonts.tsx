@@ -14,5 +14,23 @@ export const fonts = StyleSheet.create({
     fontSize: 28,
     lineHeight: 31,
     letterSpacing: 2
+  },
+  level: {
+    fontFamily: "PottaOne",
+    fontSize: 42,
+    letterSpacing: 2,
+    verticalAlign: "bottom",
+  },
+  stdHeader: {
+    fontFamily: "PoiretOne",
+    color: "#A9A9A9",
+    fontSize: 27,
+    letterSpacing: 2,
+  },
+  overviewItem: {
+    fontFamily: "Podkova",
+    color: "#FFFFFF",
+    fontSize: 23,
+    letterSpacing: 2
   }
 });

@@ -10,7 +10,9 @@ type Props = {
   value: string,
   gap: number,
   style: TextStyle,
-  prefix: ReactElement | undefined
+  valueColor: string | undefined,
+  prefix: ReactElement | undefined,
+  postfix: string | undefined,
 };
 
 export default function ProfileStat({
@@ -18,8 +20,10 @@ export default function ProfileStat({
   value,
   gap,
   style,
+  valueColor,
+  postfix,
   prefix
-} : Props) {
+}: Props) {
   return (
     <View style={{
       ...containers.rowFarApart,
@@ -33,8 +37,16 @@ export default function ProfileStat({
       <Text style={style}>
         {title}:
       </Text>
-      <Text style={style}>
+      <Text style={{
+        ...style,
+        color: valueColor ? valueColor : style.color
+      }}>
         {value}
+        {postfix && (
+          <Text style={style}>
+            {postfix}
+          </Text>
+        )}
       </Text>
     </View>
   )

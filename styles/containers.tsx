@@ -59,16 +59,81 @@ export const containers = StyleSheet.create({
     borderWidth: .5,
     borderColor: "#D9D9D9",
     borderRadius: 10,
-    padding: 15,
+    paddingLeft: 10,
+    paddingVertical: 10,
+    paddingRight: 15,
+  },
+  bars: {
+    gap: 2,
+    zIndex: 1
   },
   tierBar: {
-    width: 110,
-    height: 13.5,
+    width: 90,
+    height: 15,
     borderWidth: .5,
     borderColor: "#D9D9D9",
-
+    borderTopRightRadius: 25,
+    borderBottomRightRadius: 10,
+    marginLeft: -2,
   },
   activityBar: {
-
+    width: 200,
+    height: 30,
+    borderWidth: .5,
+    borderColor: "#D9D9D9",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 30,
+    marginLeft: -40,
+    marginBottom: -1
+  },
+  activityValues: {
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+    gap: 0,
+    marginLeft: "auto",
+    marginBottom: 4
+  },
+  overlay: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#0000008C",
+    zIndex: 3,
+  },
+  addActivity: {
+    width: "95%",
+    borderWidth: .5,
+    borderRadius: 10,
+    borderColor: "#D9D9D9",
+    backgroundColor: "#3B0C8E",
+    margin: "auto",
+    paddingVertical: 15,
+    paddingHorizontal: 10,
+    gap: 10,
+    alignItems: "center"
+  },
+  addActivityOption: {
+    flexDirection: "row",
+    width: "100%",
+  },
+  addActivityValues: {
+    justifyContent: "space-around",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    width: "75%",
+  },
+  closingButton: {
+    position: "absolute",
+    top: 15,
+    right: 15,
+    width: 25,
+    height: 25,
+  },
+  optionItem: {
+    width: "45%",
+    borderColor: "#D9D9D9",
   }
 });

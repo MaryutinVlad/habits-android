@@ -38,7 +38,12 @@ export const assets = StyleSheet.create({
     width: 90,
     height: 90,
     borderRadius: 90,
-    marginLeft: 10,
-    marginVertical: "auto",
+    backgroundColor: "red",
+    zIndex: 2,
+  },
+  close: {
+    width: 30,
+    height: 30,
+    objectFit: "contain",
   }
 });

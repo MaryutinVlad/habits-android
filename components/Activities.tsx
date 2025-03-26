@@ -6,7 +6,14 @@ import { fonts } from "@/styles/fonts";
 import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
 
-export default function Activities() {
+type Props = {
+  onOpenPopup(): void,
+}
+
+export default function Activities({
+  onOpenPopup
+} : Props) {
+
   return (
     <View style={containers.stdSection}>
       <View style={containers.rowFarApart}>
@@ -14,7 +21,9 @@ export default function Activities() {
           Activities
         </Text>
         <View style={containers.closeApart}>
-          <Pressable>
+          <Pressable
+            onPress={() => onOpenPopup()}
+          >
             <Image
               source={require("@/assets/images/add.png")}
               style={assets.actButton}

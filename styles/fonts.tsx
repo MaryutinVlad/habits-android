@@ -32,5 +32,19 @@ export const fonts = StyleSheet.create({
     color: "#FFFFFF",
     fontSize: 23,
     letterSpacing: 2
+  },
+  activityName: {
+    fontFamily: "Podkova",
+    color: "#FFFFFF",
+    fontSize: 23,
+    letterSpacing: 1
+  },
+  addActivityPropName: {
+    width: "25%",
+  },
+  activityValue: {
+    fontFamily: "Podkova",
+    color: "#FFFFFF",
+    fontSize: 20,
   }
 });

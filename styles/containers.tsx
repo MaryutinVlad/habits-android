@@ -94,27 +94,6 @@ export const containers = StyleSheet.create({
     marginLeft: "auto",
     marginBottom: 4
   },
-  overlay: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "#0000008C",
-    zIndex: 3,
-  },
-  addActivity: {
-    width: "95%",
-    borderWidth: .5,
-    borderRadius: 10,
-    borderColor: "#D9D9D9",
-    backgroundColor: "#3B0C8E",
-    margin: "auto",
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    gap: 10,
-    alignItems: "center"
-  },
   addActivityOption: {
     flexDirection: "row",
     width: "100%",
@@ -123,17 +102,10 @@ export const containers = StyleSheet.create({
     justifyContent: "space-around",
     flexDirection: "row",
     flexWrap: "wrap",
-    width: "75%",
-  },
-  closingButton: {
-    position: "absolute",
-    top: 15,
-    right: 15,
-    width: 25,
-    height: 25,
+    width: "70%",
   },
   optionItem: {
-    width: "45%",
+    width: "50%",
     borderColor: "#D9D9D9",
   }
 });

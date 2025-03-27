@@ -24,7 +24,7 @@ export const fonts = StyleSheet.create({
   stdHeader: {
     fontFamily: "PoiretOne",
     color: "#A9A9A9",
-    fontSize: 27,
+    fontSize: 30,
     letterSpacing: 2,
   },
   overviewItem: {
@@ -33,14 +33,8 @@ export const fonts = StyleSheet.create({
     fontSize: 23,
     letterSpacing: 2
   },
-  activityName: {
-    fontFamily: "Podkova",
-    color: "#FFFFFF",
-    fontSize: 23,
-    letterSpacing: 1
-  },
   addActivityPropName: {
-    width: "25%",
+    width: "30%",
   },
   activityValue: {
     fontFamily: "Podkova",

@@ -1,9 +1,15 @@
 import { View, Text, Pressable, TextInput, Image } from "react-native";
-import { useState } from "react";
+import { LinearGradient } from "expo-linear-gradient";
+
+import AddPopupProp from "./AddPopupProp";
+
+import { addPopupLayout } from "@/constants/addPopupLayout";
 
 import { containers } from "@/styles/containers";
+import { popupViews } from "@/styles/popupViews";
 import { assets } from "@/styles/assets";
 import { fonts } from "@/styles/fonts";
+import { popupFonts } from "@/styles/popupFonts";
 
 type Props = {
   onClose(): void
@@ -13,17 +19,18 @@ export default function AddPopup({
   onClose
 }: Props) {
 
-  const [isCountableSelected, toggleCountableMenu] = useState(false);
-
   return (
-    <View style={containers.overlay}>
-      <View style={containers.addActivity}>
+    <View style={popupViews.overlay}>
+      <LinearGradient
+        style={popupViews.container}
+        colors={["#644994", "#1C0B3A"]}
+        locations={[.25, .75]}
+      >
         <Pressable
           onPress={() => {
-            toggleCountableMenu(false);
             onClose();
           }}
-          style={containers.closingButton}>
+          style={popupViews.close}>
           <Image
             source={require("@/assets/images/close.png")}
             style={assets.close}
@@ -37,100 +44,43 @@ export default function AddPopup({
           placeholderTextColor={"#FFFFFF"}
           autoCorrect={false}
           maxLength={16}
-          style={{
-            ...fonts.activityName,
-            textDecorationLine: "underline"
-          }}
+          style={popupFonts.underlined}
         />
+        {
+          addPopupLayout.map(item => (
+            <AddPopupProp
+              key={item.title}
+              title={item.title}
+              options={item.options}
+              onSelectValue={(value) => console.log(value)}
+            />
+          ))
+        }
         <View style={containers.addActivityOption}>
           <Text style={{
-            ...fonts.activityName,
+            ...popupFonts.basic,
             ...fonts.addActivityPropName,
           }}>
-            Type:
-          </Text>
-          <View style={containers.addActivityValues}>
-            <Pressable
-              style={{
-                ...containers.optionItem,
-              }}
-              onPress={() => toggleCountableMenu(!isCountableSelected)}
-            >
-              <Text style={{
-                ...fonts.activityName,
-                textAlign: "right",
-                textDecorationLine: isCountableSelected ? "underline" : "none",
-                color: isCountableSelected ? "#2C9C24" : "#FFFFFF",
-              }}>
-                countable
-              </Text>
-            </Pressable>
-            <Pressable
-              style={{
-                ...containers.optionItem,
-              }}
-            >
-              <Text style={{
-                ...fonts.activityName,
-                textAlign: "center",
-              }}>
-                yes / no
-              </Text>
-            </Pressable>
-            {
-              isCountableSelected && (
-                <>
-                  <Text style={{
-                    ...fonts.activityName,
-                    ...containers.optionItem,
-                    textAlign: "right",
-                    lineHeight: 35,
-                  }}>
-                    value:
-                  </Text>
-                  <TextInput
-                    style={{
-                      ...fonts.activityName,
-                      ...containers.optionItem,
-                      textAlign: "center",
-                      paddingLeft: 10,
-                      lineHeight: 23,
-                      textDecorationLine: "underline",
-                    }}
-                    defaultValue="0"
-                  />
-                </>
-              )
-            }
-          </View>
-        </View>
-        <View style={containers.addActivityOption}>
-          <Text style={{
-            ...fonts.activityName,
-            ...fonts.addActivityPropName,
-          }}>
-            Tiering:
+            Portrait:
           </Text>
           <View style={containers.addActivityValues}>
             <Pressable style={containers.optionItem}>
-              <Text style={{
-                ...fonts.activityName,
-                textAlign: "right"
-              }}>
-                standard
-              </Text>
+              <Image
+                style={assets.addPortrait}
+                source={require("@/assets/images/defaultPortrait.png")}
+                alt="portrait"
+              />
             </Pressable>
             <Pressable style={containers.optionItem}>
-              <Text style={{
-                ...fonts.activityName,
-                textAlign: "center"
-              }}>
-                custom
-              </Text>
+              <Image
+                style={assets.addPortrait}
+                source={require("@/assets/images/saveButton.png")}
+                alt="portrait"
+              />
             </Pressable>
           </View>
         </View>
-      </View>
+      </LinearGradient>
     </View>
   )
 }

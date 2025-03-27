@@ -5,10 +5,8 @@ import AddPopupProp from "./AddPopupProp";
 
 import { addPopupLayout } from "@/constants/addPopupLayout";
 
-import { containers } from "@/styles/containers";
 import { popupViews } from "@/styles/popupViews";
 import { assets } from "@/styles/assets";
-import { fonts } from "@/styles/fonts";
 import { popupFonts } from "@/styles/popupFonts";
 
 type Props = {
@@ -36,7 +34,7 @@ export default function AddPopup({
             style={assets.close}
           />
         </Pressable>
-        <Text style={fonts.stdHeader}>
+        <Text style={popupFonts.header}>
           Add activity
         </Text>
         <TextInput
@@ -44,7 +42,7 @@ export default function AddPopup({
           placeholderTextColor={"#FFFFFF"}
           autoCorrect={false}
           maxLength={16}
-          style={popupFonts.underlined}
+          style={popupFonts.name}
         />
         {
           addPopupLayout.map(item => (
@@ -56,22 +54,19 @@ export default function AddPopup({
             />
           ))
         }
-        <View style={containers.addActivityOption}>
-          <Text style={{
-            ...popupFonts.basic,
-            ...fonts.addActivityPropName,
-          }}>
+        <View style={popupViews.prop}>
+          <Text style={popupFonts.basic}>
             Portrait:
           </Text>
-          <View style={containers.addActivityValues}>
-            <Pressable style={containers.optionItem}>
+          <View style={popupViews.options}>
+            <Pressable style={popupViews.option}>
               <Image
                 style={assets.addPortrait}
                 source={require("@/assets/images/defaultPortrait.png")}
                 alt="portrait"
               />
             </Pressable>
-            <Pressable style={containers.optionItem}>
+            <Pressable style={popupViews.option}>
               <Image
                 style={assets.addPortrait}
                 source={require("@/assets/images/saveButton.png")}

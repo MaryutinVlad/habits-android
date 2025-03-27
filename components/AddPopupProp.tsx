@@ -1,10 +1,11 @@
-import { View, Text, Pressable } from "react-native";
-import { useState } from "react";
+import { View, Text } from "react-native";
 
-import AddPopupSuboptions from "./AddPopupSuboptions";
+import AddPopupOption from "./AddPopupOption";
+import AddPopupSuboption from "./AddPopupSuboption";
 
 import { popupViews } from "@/styles/popupViews";
 import { popupFonts } from "@/styles/popupFonts";
+import { useState } from "react";
 
 type Props = {
   title: string,
@@ -15,13 +16,18 @@ type Props = {
   onSelectValue(value: string): void,
 };
 
-export default function AddPopupOption({
+export default function AddPopupProp({
   title,
   options,
   onSelectValue,
 }: Props) {
 
-  const [ suboptions, setSuboptions ] = useState([""]);
+  const emptySuboptions = {
+    title: "",
+    content: [""],
+  };
+
+  const [suboptionsToShow, setSuboptions] = useState(emptySuboptions);
 
   return (
     <View style={popupViews.prop}>
@@ -31,24 +37,23 @@ export default function AddPopupOption({
       <View style={popupViews.options}>
         {
           options.map(option => (
-            <Pressable
-              style={popupViews.option}
-              onPress={option.suboptions.length ?
-                () => setSuboptions(option.suboptions) :
-                () => onSelectValue(option.title)
-              }>
-              <Text style={popupFonts.pressable}>
-                {option.title}
-              </Text>
-            </Pressable>
+            <AddPopupOption
+              key={`${title}-${option.title}`}
+              title={option.title}
+              suboptions={option.suboptions}
+              onToggleSuboptions={(title, suboptions) => title === suboptionsToShow.title ?
+                setSuboptions(emptySuboptions) :
+                setSuboptions({ title: title, content: suboptions })
+              }
+            />
           ))
         }
         {
-          suboptions[0] && (
-            <AddPopupSuboptions
-              suboptions={suboptions}
+          suboptionsToShow.content[0] && suboptionsToShow.content.map(suboption => (
+            <AddPopupSuboption
+              title={suboption}
             />
-          )
+          ))
         }
       </View>
     </View>

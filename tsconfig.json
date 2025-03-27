@@ -13,5 +13,5 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, "styles/popupViews.ts", "styles/popupFonts.ts", "styles/fonts.ts", "styles/containers.ts", "styles/assets.ts"  ]
 }

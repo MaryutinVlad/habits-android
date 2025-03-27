@@ -1,15 +1,11 @@
 import { StyleSheet } from "react-native";
 
-const basicFont = {
-  fontFamily: "Podkova",
-  color: "#FFFFFF",
-  fontSize: 23,
-  letterSpacing: 1
-};
+import { basicFont, stdHeader, colors } from "@/constants/styles";
 
 export const popupFonts = StyleSheet.create({
   basic: basicFont,
-  underlined: {
+  header: stdHeader,
+  name: {
     ...basicFont,
     textDecorationLine: "underline",
   },
@@ -20,5 +16,9 @@ export const popupFonts = StyleSheet.create({
   pressable: {
     ...basicFont,
     textAlign: "center",
+  },
+  selected: {
+    textDecorationLine: "underline",
+    color: colors.green,
   }
 });

@@ -36,6 +36,7 @@ export const popupViews = StyleSheet.create({
   options: {
     width: "70%",
     flexDirection: "row",
+    flexWrap: "wrap",
   },
   option: {
     width: "50%",

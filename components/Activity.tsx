@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
 import { fonts } from "@/styles/fonts";
+import { activityFonts } from "@/styles/activityFonts";
 import ProfileStat from "./ProfileStat";
 
 export default function Activity() {
@@ -21,7 +22,7 @@ export default function Activity() {
           style={assets.activity}
         />
         <View style={{justifyContent: "space-between"}}>
-          <Text style={fonts.activityName}>
+          <Text style={activityFonts.name}>
             ActivityName (<Text style={{color: tierColor }}>{tier}</Text>)
           </Text>
           <View style={containers.bars}>

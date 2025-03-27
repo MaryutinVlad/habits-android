@@ -49,6 +49,7 @@ export const assets = StyleSheet.create({
   addPortrait: {
     width: 90,
     height: 90,
-    objectFit: "contain"
+    objectFit: "contain",
+    margin: "auto"
   }
 });

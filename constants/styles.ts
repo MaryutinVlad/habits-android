@@ -3,6 +3,15 @@ export const colors = {
   red: "#CB1A1A",
 };
 
+export const tierColors = [
+  "#FFFFFF",
+  "#B87333",
+  "#C0C0C0",
+  "#FFD700",
+  "#00D4FF",
+  "#CB1A1A"
+];
+
 export const basicFont = {
   fontFamily: "Podkova",
   color: "#FFFFFF",

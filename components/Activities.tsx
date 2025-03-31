@@ -38,6 +38,11 @@ export default function Activities({
         </View>
       </View>
       <Activity />
+      <Activity />
+      <Activity />
+      <Activity />
+      <Activity />
+      <Activity />
     </View>
   )
 }

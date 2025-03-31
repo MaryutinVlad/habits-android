@@ -40,5 +40,10 @@ export const popupViews = StyleSheet.create({
   },
   option: {
     width: "50%",
+  },
+  suboptions: {
+    width: "100%",
+    flexDirection: "row",
+    alignItems: "center",
   }
 });

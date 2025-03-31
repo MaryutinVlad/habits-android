@@ -20,5 +20,10 @@ export const popupFonts = StyleSheet.create({
   selected: {
     textDecorationLine: "underline",
     color: colors.green,
+  },
+  suboption: {
+    ...basicFont,
+    width: "50%",
+    textAlign: "center" 
   }
 });

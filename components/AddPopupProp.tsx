@@ -1,33 +1,50 @@
 import { View, Text } from "react-native";
+import { useState } from "react";
 
 import AddPopupOption from "./AddPopupOption";
 import AddPopupSuboption from "./AddPopupSuboption";
 
+import { tierColors } from "@/constants/styles";
+import { emptySuboptions } from "@/constants/addPopup";
+
 import { popupViews } from "@/styles/popupViews";
 import { popupFonts } from "@/styles/popupFonts";
-import { useState } from "react";
 
 type Props = {
   title: string,
   options: {
     title: string,
     suboptions: string[],
+    colored: boolean,
   }[],
-  onSelectValue(value: string): void,
+  onChangeOptionValue(propName: string, optionName: string, suboptions: string[]): void,
+  onChangeSuboptionValue(suboptionTitle: string, suoptionValue: string): void,
 };
 
 export default function AddPopupProp({
   title,
   options,
-  onSelectValue,
+  onChangeOptionValue,
+  onChangeSuboptionValue,
 }: Props) {
 
-  const emptySuboptions = {
-    title: "",
-    content: [""],
-  };
-
   const [suboptionsToShow, setSuboptions] = useState(emptySuboptions);
+  const [currentlySelected, setCurrentlySelected] = useState("");
+
+  const selectProp = (optionTitle: string, suboptions: string[], colored: boolean) => {
+
+    if (currentlySelected === optionTitle) {
+
+      setCurrentlySelected("");
+      setSuboptions(emptySuboptions);
+
+    } else {
+      onChangeOptionValue(title, optionTitle, suboptions);
+
+      setCurrentlySelected(optionTitle);
+      setSuboptions({ title: optionTitle, content: suboptions, colored: colored });
+    }
+  };
 
   return (
     <View style={popupViews.prop}>
@@ -41,17 +58,20 @@ export default function AddPopupProp({
               key={`${title}-${option.title}`}
               title={option.title}
               suboptions={option.suboptions}
-              onToggleSuboptions={(title, suboptions) => title === suboptionsToShow.title ?
-                setSuboptions(emptySuboptions) :
-                setSuboptions({ title: title, content: suboptions })
-              }
+              colored={option.colored}
+              onSelect={(title, suboptions, colored) => selectProp(title, suboptions, colored)}
+              currentlySelected={currentlySelected}
             />
           ))
         }
         {
-          suboptionsToShow.content[0] && suboptionsToShow.content.map(suboption => (
+          suboptionsToShow.content[0] && suboptionsToShow.content.map((suboption, index) => (
             <AddPopupSuboption
+              key={`${title}-${suboption}`}
+              index={index}
+              color={suboptionsToShow.colored ? tierColors[index] : "#FFFFFF"}
               title={suboption}
+              onChangeSuboptionValue={(suboptionTitle, value) => onChangeSuboptionValue(suboptionTitle, value)}
             />
           ))
         }

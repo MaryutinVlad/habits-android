@@ -1,9 +1,11 @@
 import { View, Text, Pressable, TextInput, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react";
+
 
 import AddPopupProp from "./AddPopupProp";
 
-import { addPopupLayout } from "@/constants/addPopupLayout";
+import { addPopupLayout, emptyValues } from "@/constants/addPopup";
 
 import { popupViews } from "@/styles/popupViews";
 import { assets } from "@/styles/assets";
@@ -16,6 +18,8 @@ type Props = {
 export default function AddPopup({
   onClose
 }: Props) {
+
+  const [selectedValues, setSelectedValues] = useState(emptyValues);
 
   return (
     <View style={popupViews.overlay}>
@@ -50,7 +54,8 @@ export default function AddPopup({
               key={item.title}
               title={item.title}
               options={item.options}
-              onSelectValue={(value) => console.log(value)}
+              onChangeOptionValue={(propName, optionTitle) => console.log(propName, optionTitle)}
+              onChangeSuboptionValue={(suboptionTitle, suboptionValue) => console.log(suboptionTitle, suboptionValue)}
             />
           ))
         }

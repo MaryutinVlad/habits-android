@@ -1,5 +1,4 @@
 import { Pressable, Text } from "react-native";
-import { useState } from "react";
 
 import { popupViews } from "@/styles/popupViews";
 import { popupFonts } from "@/styles/popupFonts";
@@ -7,29 +6,25 @@ import { popupFonts } from "@/styles/popupFonts";
 type Props = {
   title: string,
   suboptions: string[],
-  onToggleSuboptions(title: string, suboptions: string[]): void,
+  colored: boolean,
+  onSelect(title: string, suboptions: string[], colored: boolean): void,
+  currentlySelected: string,
 };
 
 export default function AddPopupOption({
   title,
   suboptions,
-  onToggleSuboptions,
+  colored,
+  onSelect,
+  currentlySelected,
 }: Props) {
-
-  const [isSelected, toggleSelected] = useState(false);
 
   return (
     <Pressable
       style={popupViews.option}
-      onPress={() => {
-        if (suboptions[0]) {
-          onToggleSuboptions(title, suboptions);
-        }
-        toggleSelected(!isSelected);
-      }
-      }>
+      onPress={() => onSelect(title, suboptions, colored)}>
       <Text
-        style={isSelected ?
+        style={currentlySelected === title ?
           { ...popupFonts.pressable, ...popupFonts.selected } :
           popupFonts.pressable
         }>

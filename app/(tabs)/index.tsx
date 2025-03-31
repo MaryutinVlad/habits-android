@@ -1,6 +1,6 @@
-import { View, Text, TextInput, Pressable, Image } from "react-native";
+import Animated, { useAnimatedRef } from 'react-native-reanimated';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LinearGradient } from "expo-linear-gradient";
-
 import { useState } from "react";
 
 import Profile from "@/components/Profile";
@@ -13,6 +13,8 @@ import AddPopup from "@/components/AddPopup";
 
 export default function HomeScreen() {
 
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
+
   const [isActivityPopupOpened, toggleActivityPopup] = useState(false);
 
   const closePopup = () => {
@@ -20,23 +22,29 @@ export default function HomeScreen() {
   };
 
   return (
-    <LinearGradient
-      colors={["#3B0C8E", "#1950A8"]}
-      locations={[.25, .75]}
-      style={containers.app}
-    >
-      <Profile />
-      <Overview />
-      <Activities
-        onOpenPopup={() => toggleActivityPopup(true)}
-      />
-      {
-        isActivityPopupOpened && (
-          <AddPopup
-            onClose={closePopup}
+    <GestureHandlerRootView>
+
+      <LinearGradient
+        colors={["#3B0C8E", "#1950A8"]}
+        locations={[.25, .75]}
+        style={containers.app}
+      >
+        <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16} showsVerticalScrollIndicator={false}>
+
+          <Profile />
+          <Overview />
+          <Activities
+            onOpenPopup={() => toggleActivityPopup(true)}
           />
-        )
-      }
-    </LinearGradient>
+        </Animated.ScrollView>
+        {
+          isActivityPopupOpened && (
+            <AddPopup
+              onClose={closePopup}
+            />
+          )
+        }
+      </LinearGradient>
+    </GestureHandlerRootView>
   );
 }

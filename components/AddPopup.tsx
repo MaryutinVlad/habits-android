@@ -2,6 +2,7 @@ import { View, Text, Pressable, TextInput, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 
+import type { ActivityValues, } from "@/types/types";
 
 import AddPopupProp from "./AddPopupProp";
 
@@ -12,14 +13,60 @@ import { assets } from "@/styles/assets";
 import { popupFonts } from "@/styles/popupFonts";
 
 type Props = {
+  onAddActivity(selectedValues: ActivityValues): void,
   onClose(): void
 };
 
 export default function AddPopup({
+  onAddActivity,
   onClose
 }: Props) {
 
-  const [selectedValues, setSelectedValues] = useState(emptyValues);
+  const [activityName, setActivityName] = useState("");
+  const [validationErrorMessage, setValidationErrorMessage] = useState("");
+
+  let selectedValues = JSON.parse(JSON.stringify(emptyValues));
+
+  const validateValues = (selectedValues: ActivityValues) => {
+
+    let prop: keyof ActivityValues;
+
+    if (!activityName) {
+      setValidationErrorMessage("name cannot be empty");
+      return;
+    }
+
+    for (prop in selectedValues) {
+
+      const selectedProp = selectedValues[prop];
+
+      if (!selectedProp.value) {
+
+        setValidationErrorMessage(`${prop} field is not selected!`);
+        return;
+      }
+
+      if (Object.hasOwn(selectedProp, "suboptions")) {
+
+        const selectedSuboptions = selectedProp.suboptions;
+        let minimalValue = 0;
+
+        for (let suboption in selectedSuboptions) {
+
+          if (selectedSuboptions[suboption] <= minimalValue && minimalValue !== 0) {
+
+            setValidationErrorMessage(suboption === "value" ?
+              "custom value can't be zero" :
+              "next tier can be zero or greater than the next one");
+            return;
+          }
+
+          minimalValue = selectedSuboptions[suboption];
+        }
+      }
+    }
+
+  };
 
   return (
     <View style={popupViews.overlay}>
@@ -30,6 +77,7 @@ export default function AddPopup({
       >
         <Pressable
           onPress={() => {
+            selectedValues = JSON.parse(JSON.stringify(emptyValues));
             onClose();
           }}
           style={popupViews.close}>
@@ -47,6 +95,8 @@ export default function AddPopup({
           autoCorrect={false}
           maxLength={16}
           style={popupFonts.name}
+          value={activityName}
+          onChangeText={setActivityName}
         />
         {
           addPopupLayout.map(item => (
@@ -54,8 +104,14 @@ export default function AddPopup({
               key={item.title}
               title={item.title}
               options={item.options}
-              onChangeOptionValue={(propName, optionTitle) => console.log(propName, optionTitle)}
-              onChangeSuboptionValue={(suboptionTitle, suboptionValue) => console.log(suboptionTitle, suboptionValue)}
+              onChangeOptionValue={(propName, optionTitle) => {
+                selectedValues[propName].value = optionTitle;
+                setValidationErrorMessage("");
+              }}
+              onChangeSuboptionValue={(suboptionTitle, suboptionValue) => {
+                selectedValues[item.title].suboptions[suboptionTitle] = Number(suboptionValue);
+                setValidationErrorMessage("");
+              }}
             />
           ))
         }
@@ -71,7 +127,10 @@ export default function AddPopup({
                 alt="portrait"
               />
             </Pressable>
-            <Pressable style={popupViews.option}>
+            <Pressable
+              style={popupViews.option}
+              onPress={() => validateValues(selectedValues)}
+            >
               <Image
                 style={assets.addPortrait}
                 source={require("@/assets/images/saveButton.png")}

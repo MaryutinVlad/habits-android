@@ -3,6 +3,8 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { LinearGradient } from "expo-linear-gradient";
 import { useState } from "react";
 
+import type { ActivityValues } from '@/types/types';
+
 import Profile from "@/components/Profile";
 import Overview from "@/components/Overview";
 
@@ -16,6 +18,10 @@ export default function HomeScreen() {
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
 
   const [isActivityPopupOpened, toggleActivityPopup] = useState(false);
+
+  const addActivity = (selectedValues: ActivityValues) => {
+    console.log(selectedValues);
+  }
 
   const closePopup = () => {
     toggleActivityPopup(false);
@@ -40,6 +46,7 @@ export default function HomeScreen() {
         {
           isActivityPopupOpened && (
             <AddPopup
+              onAddActivity={(selectedValues) => addActivity(selectedValues)}
               onClose={closePopup}
             />
           )

@@ -34,13 +34,24 @@ export const addPopupLayout = [
 export const emptyValues = {
   type: {
     value: "",
-    suboptions: [0]
+    suboptions: {
+      value: 0,
+    }
   },
   tiering: {
     value: "",
-    suboptions: [0]
+    suboptions: {
+      tier1: 0,
+      tier2: 0,
+      tier3: 0,
+      tier4: 0,
+      tier5: 0,
+      tier6: 0,
+    }
   },
-  portrait: "",
+  portrait: {
+    value: "default portrait link",
+  },
 };
 
 export const emptySuboptions = {

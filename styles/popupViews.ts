@@ -7,7 +7,7 @@ export const popupViews = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#0000008C",
+    backgroundColor: "#000000B9",
     zIndex: 3,
   },
   close: {

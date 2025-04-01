@@ -17,7 +17,7 @@ type Props = {
     suboptions: string[],
     colored: boolean,
   }[],
-  onChangeOptionValue(propName: string, optionName: string, suboptions: string[]): void,
+  onChangeOptionValue(propName: string, optionName: string): void,
   onChangeSuboptionValue(suboptionTitle: string, suoptionValue: string): void,
 };
 
@@ -36,11 +36,12 @@ export default function AddPopupProp({
     if (currentlySelected === optionTitle) {
 
       setCurrentlySelected("");
+      onChangeOptionValue(title, "");
       setSuboptions(emptySuboptions);
 
     } else {
-      onChangeOptionValue(title, optionTitle, suboptions);
 
+      onChangeOptionValue(title, optionTitle);
       setCurrentlySelected(optionTitle);
       setSuboptions({ title: optionTitle, content: suboptions, colored: colored });
     }

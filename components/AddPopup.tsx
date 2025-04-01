@@ -1,8 +1,8 @@
 import { View, Text, Pressable, TextInput, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import type { ActivityValues, } from "@/types/types";
+import type { ActivityValues } from "@/types/types";
 
 import AddPopupProp from "./AddPopupProp";
 
@@ -24,8 +24,7 @@ export default function AddPopup({
 
   const [activityName, setActivityName] = useState("");
   const [validationErrorMessage, setValidationErrorMessage] = useState("");
-
-  let selectedValues = JSON.parse(JSON.stringify(emptyValues));
+  const [selectedValues, setSelectedValues] = useState(emptyValues);
 
   const validateValues = (selectedValues: ActivityValues) => {
 
@@ -65,7 +64,38 @@ export default function AddPopup({
         }
       }
     }
+    onAddActivity(selectedValues);
+  };
 
+  const changeOptionValue = (propName: string, optionTitle: string) => {
+
+    const updatedValues: ActivityValues = {
+      ...selectedValues,
+      [propName]: {
+        ...selectedValues[propName],
+        value: optionTitle,
+      }
+    };
+
+    setSelectedValues(updatedValues);
+    setValidationErrorMessage("");
+  };
+
+  const changeSuboptionValue = (propName: string, suboptionTitle: string, suboptionValue: string) => {
+    
+    const updatedValues: ActivityValues = {
+      ...selectedValues,
+      [propName]: {
+        ...selectedValues[propName],
+        suboptions: {
+          ...selectedValues[propName].suboptions,
+          [suboptionTitle]: Number(suboptionValue),
+        }
+      }
+    }
+
+    setSelectedValues(updatedValues);
+    setValidationErrorMessage("");
   };
 
   return (
@@ -77,7 +107,7 @@ export default function AddPopup({
       >
         <Pressable
           onPress={() => {
-            selectedValues = JSON.parse(JSON.stringify(emptyValues));
+            setSelectedValues(emptyValues);
             onClose();
           }}
           style={popupViews.close}>
@@ -89,6 +119,13 @@ export default function AddPopup({
         <Text style={popupFonts.header}>
           Add activity
         </Text>
+        {
+          validationErrorMessage && (
+            <Text style={popupFonts.error}>
+              {validationErrorMessage}
+            </Text>
+          )
+        }
         <TextInput
           placeholder="type in name here"
           placeholderTextColor={"#FFFFFF"}
@@ -96,7 +133,10 @@ export default function AddPopup({
           maxLength={16}
           style={popupFonts.name}
           value={activityName}
-          onChangeText={setActivityName}
+          onChangeText={text => {
+            setValidationErrorMessage("");
+            setActivityName(text);
+          }}
         />
         {
           addPopupLayout.map(item => (
@@ -104,12 +144,12 @@ export default function AddPopup({
               key={item.title}
               title={item.title}
               options={item.options}
-              onChangeOptionValue={(propName, optionTitle) => {
-                selectedValues[propName].value = optionTitle;
+              onChangeOptionValue={(propName: string, optionTitle: string) => {
+                changeOptionValue(propName, optionTitle);
                 setValidationErrorMessage("");
               }}
-              onChangeSuboptionValue={(suboptionTitle, suboptionValue) => {
-                selectedValues[item.title].suboptions[suboptionTitle] = Number(suboptionValue);
+              onChangeSuboptionValue={(suboptionTitle: string, suboptionValue: string) => {
+                changeSuboptionValue(item.title, suboptionTitle, suboptionValue);
                 setValidationErrorMessage("");
               }}
             />

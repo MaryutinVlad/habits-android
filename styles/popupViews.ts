@@ -31,7 +31,7 @@ export const popupViews = StyleSheet.create({
   prop: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   options: {
     width: "70%",
@@ -45,5 +45,15 @@ export const popupViews = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
+  },
+  gallery: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    flexWrap: "wrap",
+    gap: 10,
+  },
+  portrait: {
+    justifyContent: "center",
   }
 });

@@ -6,7 +6,8 @@ export const containers = StyleSheet.create({
     width: "100%",
     marginTop: 32,
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingTop: 15,
+    paddingBottom: 35,
     gap: 5,
   },
   profile: {

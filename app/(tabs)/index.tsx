@@ -19,8 +19,10 @@ export default function HomeScreen() {
 
   const [isActivityPopupOpened, toggleActivityPopup] = useState(false);
 
-  const addActivity = (selectedValues: ActivityValues) => {
+  const addActivity = (selectedValues: ActivityValues, portraitIndex: number, activityName: string) => {
     console.log(selectedValues);
+    console.log(portraitIndex);
+    closePopup();
   }
 
   const closePopup = () => {
@@ -46,7 +48,7 @@ export default function HomeScreen() {
         {
           isActivityPopupOpened && (
             <AddPopup
-              onAddActivity={(selectedValues) => addActivity(selectedValues)}
+              onAddActivity={(selectedValues, portraitIndex, activityName) => addActivity(selectedValues, portraitIndex, activityName)}
               onClose={closePopup}
             />
           )

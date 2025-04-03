@@ -15,8 +15,8 @@ type Props = {
   options: {
     title: string,
     suboptions: string[],
-    colored: boolean,
   }[],
+  colored: boolean,
   onChangeOptionValue(propName: string, optionName: string): void,
   onChangeSuboptionValue(suboptionTitle: string, suoptionValue: string): void,
 };
@@ -24,6 +24,7 @@ type Props = {
 export default function AddPopupProp({
   title,
   options,
+  colored,
   onChangeOptionValue,
   onChangeSuboptionValue,
 }: Props) {
@@ -59,7 +60,7 @@ export default function AddPopupProp({
               key={`${title}-${option.title}`}
               title={option.title}
               suboptions={option.suboptions}
-              colored={option.colored}
+              colored={colored}
               onSelect={(title, suboptions, colored) => selectProp(title, suboptions, colored)}
               currentlySelected={currentlySelected}
             />

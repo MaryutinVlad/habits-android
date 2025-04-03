@@ -44,7 +44,8 @@
             "./assets/fonts/PottaOne-Regular.ttf"
           ]
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true

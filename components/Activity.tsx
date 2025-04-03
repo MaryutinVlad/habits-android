@@ -18,7 +18,7 @@ export default function Activity() {
     <View>
       <View style={containers.activity}>
         <Image
-          source={require("@/assets/images/testAvatar.png")}
+          source={require("@/assets/images/defaultPortrait.png")}
           style={assets.activity}
         />
         <View style={{justifyContent: "space-between"}}>

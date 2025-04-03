@@ -29,5 +29,6 @@ export const popupFonts = StyleSheet.create({
   error: {
     ...basicFont,
     color: colors.red,
+    textAlign: "center",
   },
 });

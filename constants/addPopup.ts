@@ -1,37 +1,37 @@
-export const addPopupLayout = [
+import type { Layout, ActivityValues } from "@/types/types";
+
+export const layout: Layout[] = [
   {
     title: "type",
     options: [
       {
         title: "countable",
         suboptions: ["value"],
-        colored: false,
       },
       {
         title: "yes/no",
-        suboptions: [""],
-        colored: false,
+        suboptions: [],
       }
-    ]
+    ],
+    colored: false
   },
   {
     title: "tiering",
     options: [
       {
         title: "standard",
-        suboptions: [""],
-        colored: false,
+        suboptions: [],
       },
       {
         title: "custom",
-        suboptions: ["tier 1", "tier 2", "tier 3", "tier 4", "tier 5", "tier 6"],
-        colored: true,
+        suboptions: ["tier1", "tier2", "tier3", "tier4", "tier5", "tier6"],
       }
-    ]
-  }
+    ],
+    colored: true
+  },
 ];
 
-export const emptyValues = {
+export const emptyValues : ActivityValues = {
   type: {
     value: "",
     suboptions: {
@@ -48,14 +48,26 @@ export const emptyValues = {
       tier5: 0,
       tier6: 0,
     }
-  },
-  portrait: {
-    value: "default portrait link",
-  },
+  }
 };
 
 export const emptySuboptions = {
-    title: "",
-    content: [""],
-    colored: false,
-  };
+  title: "",
+  content: [""],
+  colored: false,
+};
+
+export const gallery = [
+  require("@/assets/images/defaultPortrait.png"),
+  require("@/assets/images/learn.png"),
+  require("@/assets/images/pe.png"),
+  require("@/assets/images/defaultPortrait.png"),
+  require("@/assets/images/learn.png"),
+  require("@/assets/images/pe.png"),
+  require("@/assets/images/defaultPortrait.png"),
+  require("@/assets/images/learn.png"),
+  require("@/assets/images/pe.png"),
+  require("@/assets/images/defaultPortrait.png"),
+  require("@/assets/images/learn.png"),
+  require("@/assets/images/pe.png"),
+];

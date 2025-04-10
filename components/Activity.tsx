@@ -1,29 +1,42 @@
 import { View, Text, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+import type { ActivityType, ActivityValues } from "@/types/types";
+
+import ProfileStat from "./ProfileStat";
+
+import { tierColors } from "@/constants/styles";
+import { gallery } from "@/constants/addPopup";
+
+import { defineStandardTiering, defineCustomTiering, defineTier } from "@/helpers/helpers";
+
 import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
 import { fonts } from "@/styles/fonts";
 import { activityFonts } from "@/styles/activityFonts";
-import ProfileStat from "./ProfileStat";
 
-export default function Activity() {
+type Props = {
+  data: ActivityType,
+};
 
-  const tier = 1;
-  const colors = ["#FFFFFF", "#B87333", "#C0C0C0", "#FFD700", "#00D4FF"];
-  const tierColor = colors[tier];
+export default function Activity({
+  data,
+}: Props) {
 
+  const parsedTiering = JSON.parse(data.tiering)
+  const tier = defineTier(data.total, parsedTiering);
+  const tierColor = tierColors[tier];
 
   return (
     <View>
       <View style={containers.activity}>
         <Image
-          source={require("@/assets/images/defaultPortrait.png")}
+          source={gallery[data.portrait]}
           style={assets.activity}
         />
         <View style={{justifyContent: "space-between"}}>
           <Text style={activityFonts.name}>
-            ActivityName (<Text style={{color: tierColor }}>{tier}</Text>)
+            {data.title} (<Text style={{color: tierColor }}>{tier}</Text>)
           </Text>
           <View style={containers.bars}>
             <LinearGradient
@@ -47,7 +60,7 @@ export default function Activity() {
         <View style={containers.activityValues}>
           <ProfileStat
             title="goal"
-            value="5"
+            value={data.goal}
             gap={5}
             style={fonts.activityValue}
             valueColor="#2C9C24"
@@ -56,7 +69,7 @@ export default function Activity() {
           />
           <ProfileStat
             title="cur"
-            value="2"
+            value={data.cur}
             gap={5}
             style={fonts.activityValue}
             valueColor="#CB1A1A"

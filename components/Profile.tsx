@@ -3,20 +3,34 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 import ProfileStat from './ProfileStat';
 
+import { levelRequirements } from '@/constants/general';
+
+import { defineLevel } from '@/helpers/helpers';
+
 import { containers } from '@/styles/containers';
 import { fonts } from '@/styles/fonts';
 import { assets } from '@/styles/assets';
 
+type Props = {
+  name: string,
+  day: number,
+  row: number,
+  exp: number,
+};
 
-export default function Profile() {
+export default function Profile({
+  name,
+  day,
+  row,
+  exp,
+} : Props) {
 
-  //temporarly hardcoded values
-  const level= 14;
+  const { level, expOfNextLevel } = defineLevel(exp, levelRequirements);
   const levelColors = [ "#B87333", "#C0C0C0", "#FFD700", "#00D4FF" ];
+  const toLevelBar = 1 - expOfNextLevel;
 
-  const profileName = "profilename";
   const sectionWidth = 260;
-  const lineLength = Math.round((sectionWidth - profileName.length * 17.5) / 2);
+  const lineLength = Math.round((sectionWidth - name.length * 17.5) / 2);
 
   return (
     <View style={containers.profile}>
@@ -28,7 +42,7 @@ export default function Profile() {
         }}>
           <View style={{ ...containers.line, width: lineLength }} />
           <Text style={fonts.profile}>
-            {profileName}
+            {name}
           </Text>
           <View style={{ ...containers.line, width: lineLength }} />
         </View>
@@ -39,7 +53,7 @@ export default function Profile() {
           <View style={{ gap: 8 }}>
             <ProfileStat
               title="Day"
-              value="0"
+              value={day}
               gap={10}
               style={fonts.profileStat}
               valueColor={undefined}
@@ -54,7 +68,7 @@ export default function Profile() {
           <View style={{ gap: 8 }}>
             <ProfileStat
               title="Row"
-              value="0"
+              value={row}
               gap={10}
               style={fonts.profileStat}
               valueColor={undefined}
@@ -81,7 +95,7 @@ export default function Profile() {
           </Text>
           <LinearGradient
             colors={["transparent", "#B4A126"]}
-            locations={[.55, .55]}
+            locations={[toLevelBar, toLevelBar]}
             style={containers.bar}
           />
         </View>

@@ -78,6 +78,7 @@ export default function AddPopup({
         }
       }
     }
+    
     onAddActivity(
       selectedValues,
       portraitIndex,

@@ -6,12 +6,18 @@ import { fonts } from "@/styles/fonts";
 import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
 
-export default function Overview() {
+type Props = {
+  efficency: number,
+  actTotal: number,
+  actMastered: number,
+}
 
-  //temporal hardcoded values
-  const completed = 3;
-  const total = 7;
-  const efficency = Math.round( completed / total  * 100);
+export default function Overview({
+  efficency,
+  actTotal,
+  actMastered,
+}: Props) {
+
   const colors = ["#CB1A1A", "#BEC52F", "#2C9C24"];
 
   return (
@@ -27,7 +33,7 @@ export default function Overview() {
         }}>
           <ProfileStat
             title="Efficency"
-            value={`${efficency}`}
+            value={efficency}
             postfix={"%"}
             gap={7}
             style={fonts.overviewItem}
@@ -39,7 +45,7 @@ export default function Overview() {
           />
           <ProfileStat
             title="Total activities"
-            value={String(total)}
+            value={actTotal}
             postfix={undefined}
             gap={7}
             style={fonts.overviewItem}
@@ -51,7 +57,7 @@ export default function Overview() {
           />
           <ProfileStat
             title="Activities mastered"
-            value={"1"}
+            value={actMastered}
             postfix={undefined}
             gap={7}
             style={fonts.overviewItem}

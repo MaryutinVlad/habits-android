@@ -1,5 +1,7 @@
 import type { Layout, ActivityValues } from "@/types/types";
 
+import { getDate } from "@/helpers/helpers";
+
 export const layout: Layout[] = [
   {
     title: "type",
@@ -55,6 +57,17 @@ export const emptySuboptions = {
   title: "",
   content: [""],
   colored: false,
+};
+
+export const emptyUser = {
+  id: 0,
+  name: "",
+  day: 0,
+  row: 0,
+  exp: 0,
+  actTotal: 0,
+  actMastered: 0,
+  lastUpdated: getDate(),
 };
 
 export const gallery = [

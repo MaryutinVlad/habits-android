@@ -55,5 +55,12 @@ export const popupViews = StyleSheet.create({
   },
   portrait: {
     justifyContent: "center",
+  },
+  textButton: {
+    justifyContent: "center",
+    paddingHorizontal: 10,
+    borderWidth: .5,
+    borderColor: "#D9D9D9",
+    borderRadius: 20,
   }
 });

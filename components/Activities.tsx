@@ -1,5 +1,7 @@
 import { View, Text, Pressable, Image } from "react-native";
 
+import type { ActivityType } from "@/types/types";
+
 import Activity from "./Activity";
 
 import { fonts } from "@/styles/fonts";
@@ -7,11 +9,13 @@ import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
 
 type Props = {
+  data: ActivityType[],
   onOpenPopup(): void,
 }
 
 export default function Activities({
-  onOpenPopup
+  data,
+  onOpenPopup,
 } : Props) {
 
   return (
@@ -37,12 +41,14 @@ export default function Activities({
           </Pressable>
         </View>
       </View>
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
-      <Activity />
+      {
+        data.map((activity) => (
+          <Activity
+            key={activity.id}
+            data={activity}
+          />
+        ))
+      }
     </View>
   )
 }

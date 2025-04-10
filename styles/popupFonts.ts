@@ -15,7 +15,7 @@ export const popupFonts = StyleSheet.create({
   },
   pressable: {
     ...basicFont,
-    textAlign: "center",
+    textAlign: "center"
   },
   selected: {
     textDecorationLine: "underline",
@@ -24,7 +24,7 @@ export const popupFonts = StyleSheet.create({
   suboption: {
     ...basicFont,
     width: "50%",
-    textAlign: "center" 
+    textAlign: "center",
   },
   error: {
     ...basicFont,

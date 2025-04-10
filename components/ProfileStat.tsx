@@ -7,7 +7,7 @@ import type { TextStyle } from "react-native";
 
 type Props = {
   title: string,
-  value: string,
+  value: number,
   gap: number,
   style: TextStyle,
   valueColor: string | undefined,

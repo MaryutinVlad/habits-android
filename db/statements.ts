@@ -62,3 +62,21 @@ export async function createActivity(db: SQLiteDatabase, args: CreateActivityArg
     return result;
   }
 };
+
+export async function removeActivity(db: SQLiteDatabase, activityId: number) {
+
+  const statement = await db.prepareAsync(
+    `DELETE FROM activities WHERE id = $activityId`
+  );
+
+  let result;
+
+  try {
+
+    result = await statement.executeAsync({ $activityId: activityId });
+
+  } finally {
+    await statement.finalizeAsync();
+    return result;
+  }
+};

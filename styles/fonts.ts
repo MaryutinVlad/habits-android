@@ -1,5 +1,13 @@
 import { StyleSheet } from "react-native";
 
+import { colors } from "@/constants/styles";
+
+const activityValue = {
+  fontFamily: "Podkova",
+  color: "#FFFFFF",
+  fontSize: 20,
+};
+
 export const fonts = StyleSheet.create({
   profile: {
     fontFamily: "PoiretOne",
@@ -33,9 +41,9 @@ export const fonts = StyleSheet.create({
     fontSize: 23,
     letterSpacing: 2
   },
-  activityValue: {
-    fontFamily: "Podkova",
-    color: "#FFFFFF",
-    fontSize: 20,
+  activityValue,
+  deleteMode: {
+    ...activityValue,
+    color: colors.red
   }
 });

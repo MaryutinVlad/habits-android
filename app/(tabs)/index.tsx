@@ -13,7 +13,7 @@ import Activities from "@/components/Activities";
 import AddPopup from "@/components/AddPopup";
 import UsersPopup from '@/components/UsersPopup';
 
-import { createUser, getActivities, createActivity } from '@/db/statements';
+import { createUser, getActivities, createActivity, removeActivity } from '@/db/statements';
 
 import { containers } from "@/styles/containers";
 
@@ -51,6 +51,17 @@ export default function HomeScreen() {
     };
 
     const result = await createActivity(db, args);
+
+    if (result?.changes) {
+      const updatedActivities = await getActivities(db, selectedUser.id);
+      setActivities(updatedActivities);
+      closePopup();
+    }
+  };
+
+  const deleteActivity = async (activityId: number) => {
+
+    const result = await removeActivity(db, activityId);
 
     if (result?.changes) {
       const updatedActivities = await getActivities(db, selectedUser.id);
@@ -124,6 +135,7 @@ export default function HomeScreen() {
                 <Activities
                   data={activities}
                   onOpenPopup={() => toggleActivityPopup(true)}
+                  onDelete={(id) => deleteActivity(id)}
                 />
 
               </Animated.ScrollView>

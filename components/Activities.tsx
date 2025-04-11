@@ -1,4 +1,5 @@
 import { View, Text, Pressable, Image } from "react-native";
+import { useState } from "react"; 
 
 import type { ActivityType } from "@/types/types";
 
@@ -11,18 +12,26 @@ import { assets } from "@/styles/assets";
 type Props = {
   data: ActivityType[],
   onOpenPopup(): void,
+  onDelete(id: number): void
 }
 
 export default function Activities({
   data,
   onOpenPopup,
+  onDelete,
 } : Props) {
+
+  const [ deleteMode, toggleDeleteMode ] = useState(false);
 
   return (
     <View style={containers.stdSection}>
       <View style={containers.rowFarApart}>
         <Text style={fonts.stdHeader}>
-          Activities
+          Activities {deleteMode && (
+            <Text style={fonts.deleteMode}>
+              (delete mode)
+            </Text>
+          )}
         </Text>
         <View style={containers.closeApart}>
           <Pressable
@@ -33,7 +42,9 @@ export default function Activities({
               style={assets.actButton}
             />
           </Pressable>
-          <Pressable>
+          <Pressable
+            onPress={() => toggleDeleteMode(!deleteMode)}
+          >
             <Image
               source={require("@/assets/images/remove.png")}
               style={assets.actButton}
@@ -46,6 +57,11 @@ export default function Activities({
           <Activity
             key={activity.id}
             data={activity}
+            deleteMode={deleteMode}
+            onDelete={(id) => {
+              toggleDeleteMode(false);
+              onDelete(id);
+            }}
           />
         ))
       }

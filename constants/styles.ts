@@ -1,6 +1,9 @@
 export const colors = {
   green: "#2C9C24",
   red: "#CB1A1A",
+  white: "#FFFFFF",
+  lightGray: "#d9d9d9",
+  darkGray: "#A9A9A9",
 };
 
 export const tierColors = [

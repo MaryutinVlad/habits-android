@@ -13,6 +13,7 @@ import { layout, emptyValues, gallery } from "@/constants/addPopup";
 import { popupViews } from "@/styles/popupViews";
 import { assets } from "@/styles/assets";
 import { popupFonts } from "@/styles/popupFonts";
+import { colors } from "@/constants/styles";
 
 type Props = {
   onAddActivity(selectedValues: ActivityValues, portraitIndex: number, activityName: string): void,
@@ -157,9 +158,9 @@ export default function AddPopup({
         }
         <TextInput
           placeholder="type in name here"
-          placeholderTextColor={"#FFFFFF"}
+          placeholderTextColor={colors.white}
           autoCorrect={false}
-          maxLength={16}
+          maxLength={12}
           style={popupFonts.name}
           value={activityName}
           onChangeText={text => {

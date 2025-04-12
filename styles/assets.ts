@@ -35,8 +35,8 @@ export const assets = StyleSheet.create({
   },
   activity: {
     objectFit: "contain",
-    width: 90,
-    height: 90,
+    width: 90.5,
+    height: 90.5,
     borderRadius: 90,
     backgroundColor: "red",
     zIndex: 2,

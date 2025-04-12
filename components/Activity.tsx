@@ -1,22 +1,18 @@
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Image, Pressable } from "react-native";
 import { useState, useEffect } from "react";
-import { LinearGradient } from "expo-linear-gradient";
 
 import type { ActivityType } from "@/types/types";
 
-import ProfileStat from "./ProfileStat";
+import ConfirmationPopup from "./ConfirmationPopup";
+import ActivityMain from "./ActivityMain";
+import ActivityInfo from "./ActivityInfo";
 
-import { tierColors, colors } from "@/constants/styles";
-import { gallery } from "@/constants/addPopup";
+import { colors } from "@/constants/styles";
 
 import { defineTier } from "@/helpers/helpers";
 
 import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
-import { fonts } from "@/styles/fonts";
-import { activityFonts } from "@/styles/activityFonts";
-import { popupViews } from "@/styles/popupViews";
-import { popupFonts } from "@/styles/popupFonts";
 
 type Props = {
   data: ActivityType,
@@ -36,8 +32,6 @@ export default function Activity({
   const { title, cur, goal, total, portrait } = data;
   const parsedTiering = JSON.parse(data.tiering)
   const tier = defineTier(data.total, parsedTiering);
-  const tierColor = tierColors[tier];
-  const curProgress = cur < goal ? cur / goal : goal;
   const tierProgress = tier === 5 ? 1 : total / parsedTiering[tier + 1];
 
   useEffect(() => {
@@ -48,74 +42,38 @@ export default function Activity({
     <View>
       <Pressable
         style={deleteMode ? { ...containers.activity, borderColor: colors.red } : containers.activity}
-        onPress={() => deleteMode && toggleConfirmation(true)}
+        onPress={() => deleteMode ? toggleConfirmation(true) : toggleMain(!isMainShown)}
       >
         {
           (isConfirmationShown && deleteMode) && (
-            <View style={{...popupViews.overlay, borderRadius: 10}}>
-              <View style={{...popupViews.container, borderWidth: 0}}>
-                <Text style={popupFonts.capitalized}>delete activity ?</Text>
-                <View style={{...popupViews.options, justifyContent: "space-around"}}>
-                  <Pressable
-                    onPress={() => onDelete(data.id)}
-                  >
-                    <Text style={{ ...popupFonts.capitalized, color: colors.green }}>yes</Text>
-                  </Pressable>
-                  <Pressable
-                    onPress={() => toggleConfirmation(false)}
-                  >
-                    <Text style={{ ...popupFonts.capitalized, color: colors.red }}>no</Text>
-                  </Pressable>
-                </View>
-              </View>
-            </View>
+            <ConfirmationPopup
+              onDelete={() => onDelete(data.id)}
+              onCancel={() => toggleConfirmation(false)}
+            />
           )
         }
-        <Image
-          source={gallery[portrait]}
-          style={assets.activity}
-        />
-        <View style={{ justifyContent: "space-between" }}>
-          <Text style={activityFonts.name}>
-            {title} (<Text style={{ color: tierColor }}>{tier}</Text>)
-          </Text>
-          <View style={containers.bars}>
-            <LinearGradient
-              style={containers.tierBar}
-              colors={["#FE9000", "transparent"]}
-              start={{ x: 0, y: 1 }}
-              end={{ x: 1, y: 0 }}
-              locations={[tierProgress, tierProgress]}
+        {
+          isMainShown ? (
+            <ActivityMain
+              tier={tier}
+              portrait={portrait}
+              title={title}
+              goal={goal}
+              cur={cur}
+              tierProgress={tierProgress}
             />
-            <LinearGradient
-              style={containers.activityBar}
-              colors={["#BEC52F", "transparent"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              locations={[curProgress, curProgress]}
+          ) : (
+            <ActivityInfo
+              cur={cur}
+              goal={goal}
+              total={total}
+              toNextTier={tier === 5 ? tier : parsedTiering[tier + 1]}
+              day={data.day}
+              row={data.row}
             />
-          </View>
-        </View>
-        <View style={containers.activityValues}>
-          <ProfileStat
-            title="goal"
-            value={goal}
-            gap={5}
-            style={fonts.activityValue}
-            valueColor="#2C9C24"
-            postfix={undefined}
-            prefix={undefined}
-          />
-          <ProfileStat
-            title="cur"
-            value={cur}
-            gap={5}
-            style={fonts.activityValue}
-            valueColor="#CB1A1A"
-            postfix={undefined}
-            prefix={undefined}
-          />
-        </View>
+          )
+        }
+
       </Pressable>
       <Image
         source={require("@/assets/images/intersection.png")}

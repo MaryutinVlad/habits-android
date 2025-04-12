@@ -66,7 +66,8 @@ export const containers = StyleSheet.create({
   },
   bars: {
     gap: 2,
-    zIndex: 1
+    zIndex: 1,
+    alignSelf: "flex-end",
   },
   tierBar: {
     width: 90,
@@ -85,7 +86,7 @@ export const containers = StyleSheet.create({
     borderTopLeftRadius: 30,
     borderTopRightRadius: 10,
     borderBottomRightRadius: 30,
-    marginLeft: -40,
+    marginLeft: -43,
     marginBottom: -1
   },
   activityValues: {
@@ -93,7 +94,6 @@ export const containers = StyleSheet.create({
     alignItems: "flex-end",
     gap: 0,
     marginLeft: "auto",
-    marginBottom: 4
   },
   addActivityOption: {
     flexDirection: "row",
@@ -108,5 +108,10 @@ export const containers = StyleSheet.create({
   optionItem: {
     width: "50%",
     borderColor: "#D9D9D9",
+  },
+  activityInfo: {
+    paddingLeft: 5,
+    width: "100%",
+    justifyContent: "center",
   }
 });

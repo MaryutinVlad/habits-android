@@ -39,6 +39,8 @@ export const assets = StyleSheet.create({
     height: 90.5,
     borderRadius: 90,
     backgroundColor: "red",
+    borderWidth: 1,
+    borderColor: "#D9D9D9",
     zIndex: 2,
   },
   close: {

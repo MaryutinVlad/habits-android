@@ -55,7 +55,6 @@ export const containers = StyleSheet.create({
   },
   activity: {
     width: "100%",
-    height: 110,
     flexDirection: "row",
     borderWidth: .5,
     borderColor: "#D9D9D9",
@@ -87,7 +86,6 @@ export const containers = StyleSheet.create({
     borderTopRightRadius: 10,
     borderBottomRightRadius: 30,
     marginLeft: -43,
-    marginBottom: -1
   },
   activityValues: {
     justifyContent: "flex-end",

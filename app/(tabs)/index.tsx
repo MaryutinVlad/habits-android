@@ -59,6 +59,10 @@ export default function HomeScreen() {
     }
   };
 
+  const submitValue = (inputValue: number) => {
+    console.log(inputValue);
+  };
+
   const deleteActivity = async (activityId: number) => {
 
     const result = await removeActivity(db, activityId);
@@ -135,6 +139,7 @@ export default function HomeScreen() {
                 <Activities
                   data={activities}
                   onOpenPopup={() => toggleActivityPopup(true)}
+                  onSubmit={(inputValue) => submitValue(inputValue)}
                   onDelete={(id) => deleteActivity(id)}
                 />
 

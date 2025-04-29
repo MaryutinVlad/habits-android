@@ -43,6 +43,7 @@ export type ActivityType = {
   goal: number,
   tiering: string,
   portrait: number,
+  lastUpdated: string,
   user_id: number,
 };
 

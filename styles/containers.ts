@@ -110,6 +110,6 @@ export const containers = StyleSheet.create({
   activityInfo: {
     paddingLeft: 5,
     width: "100%",
-    justifyContent: "center",
+    gap: 5,
   }
 });

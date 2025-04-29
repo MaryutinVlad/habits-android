@@ -12,12 +12,14 @@ import { assets } from "@/styles/assets";
 type Props = {
   data: ActivityType[],
   onOpenPopup(): void,
+  onSubmit(inputValue: number): void,
   onDelete(id: number): void
 }
 
 export default function Activities({
   data,
   onOpenPopup,
+  onSubmit,
   onDelete,
 } : Props) {
 
@@ -58,6 +60,7 @@ export default function Activities({
             key={activity.id}
             data={activity}
             deleteMode={deleteMode}
+            onSubmit={onSubmit}
             onDelete={(id) => {
               toggleDeleteMode(false);
               onDelete(id);

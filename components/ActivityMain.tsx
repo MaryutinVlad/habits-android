@@ -1,9 +1,7 @@
-import { Image, View, Text, Pressable } from "react-native";
+import { Image, View, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
 
 import ProfileStat from "./ProfileStat";
-import InputPopup from "./InputPopup";
 
 import { containers } from "@/styles/containers";
 import { assets } from "@/styles/assets";
@@ -33,35 +31,17 @@ export default function ActivityMain({
 
   const tierColor = tierColors[tier];
   const curProgress = cur < goal ? cur / goal : goal;
-  const [ isInputShown, toggleInput ] = useState(false);
 
   return (
     <>
-      {
-        isInputShown && (
-          <InputPopup
-            onClose={() => toggleInput(false)}
-            onSubmit={(inputValue) => console.log(inputValue)}
-          />
-        )
-      }
       <Image
         source={gallery[portrait]}
         style={assets.activity}
       />
       <View style={{ justifyContent: "space-between", flex: 1 }}>
-        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-          <Text style={activityFonts.name}>
-            {title} (<Text style={{ color: tierColor }}>{tier}</Text>)
-          </Text>
-          <Pressable
-            onPress={() => toggleInput(true)}
-          >
-            <Text style={fonts.profileStat}>
-              +
-            </Text>
-          </Pressable>
-        </View>
+        <Text style={activityFonts.name}>
+          {title} (<Text style={{ color: tierColor }}>{tier}</Text>)
+        </Text>
         <View style={{ flexDirection: "row" }}>
           <View style={containers.bars}>
             <LinearGradient
